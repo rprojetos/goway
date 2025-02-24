@@ -1,16 +1,19 @@
 # Manipulação de arquivos
+<a id="index"></a>
 
 ## Principais Funções para manipulação de arquivos
 - [**⚓ 1 - os.Create**](#create)
     Cria ou trunca um arquivo e o abre para leitura e escrita.
     É uma abstração simplificada de os.OpenFile com as flags O_RDWR|O_CREATE|O_TRUNC.
+    Exemplo:
+    - [Criando um arquivo (os.Create) e escrevendo uma string com (WriteString)](#exemplo-1.4.1)
 - [**⚓ 2 - os.Open**](#open)
     Abre um arquivo apenas para leitura (O_RDONLY). Não permite escrita.
     Exemplos:
-    - Ler Todo o Conteúdo de um Arquivo
-    - Ler Linha por Linha Usando bufio.Scanner
-    - Ler em Blocos (Chunked Reading) "Ex.: Lendo em blocos de 10 bytes"
-    - Ler um arquivo de forma incremental(linha por linha)
+    - [Ler Todo o Conteúdo de um Arquivo](#exemplo-2.4.1)
+    - [Ler Linha por Linha Usando bufio.Scanner](#exemplo-2.4.2)
+    - [Ler em Blocos (Chunked Reading) "Ex.: Lendo em blocos de 10 bytes"](#exemplo-2.4.3)
+    - [Ler Linha por Linha Usando bufio.NewReader](#exemplo-2.4.4)
 - [**⚓ 3 - os.OpenFile**](#openfile)
     Oferece mais controle sobre o modo de abertura do arquivo 
     Abre um arquivo para escrita, criando-o se ele não existir
@@ -53,6 +56,8 @@ A função os.Create cria um novo arquivo ou trunca (apaga o conteúdo) de um ar
 - Modo de Abertura : O arquivo é aberto no modo de leitura e escrita (O_RDWR|O_CREATE|O_TRUNC).
 
 #### 1.4 - Exemplo Básico
+[*⚓RETORNA-TOPO*](#index)
+<a id="exemplo-1.4.1"></a>
 
 ###### 1.4.1 - Criando um novo arquivo e escrevendo nele:
 
@@ -152,6 +157,9 @@ A função os.Open é ideal quando você precisa apenas ler dados de um arquivo 
     - Fechar o arquivo com defer file.Close() para liberar os recursos.
      
 #### 2.4 - Exemplos Práticos
+[*⚓RETORNA-TOPO*](#index)
+<a id="exemplo-2.4.1"></a>
+
 ###### 2.4.1 - Ler Todo o Conteúdo de um Arquivo
 Uso: Se você deseja carregar todo o conteúdo de um arquivo na memória.
 ```go
@@ -182,6 +190,8 @@ func main() {
     fmt.Println(string(content)) // Convertendo []byte para string
 }
 ```
+[*⚓RETORNA-TOPO*](#index)
+<a id="exemplo-2.4.2"></a>
 
 ###### 2.4.2 - Ler Linha por Linha Usando bufio.Scanner
 Se o arquivo for grande ou você precisar processar o conteúdo linha por linha.
@@ -215,6 +225,8 @@ func main() {
     }
 }
 ```
+[*⚓RETORNA-TOPO*](#index)
+<a id="exemplo-2.4.3"></a>
 
 ###### 2.4.3 - Ler em Blocos (Chunked Reading)
 Se o arquivo for muito grande e você quiser ler em blocos menores para economizar memória.
@@ -246,8 +258,10 @@ func main() {
     }
 }
 ```
+[*⚓RETORNA-TOPO*](#index)
+<a id="exemplo-2.4.4"></a>
 
-###### 2.4.4 - Ler um arquivo de forma incremental(linha por linha)
+###### 2.4.4 - Ler Linha por Linha Usando bufio.NewReader
 Para ler um arquivo linha por linha em Go, você pode combinar os.Open com bufio.NewReader. Essa abordagem é eficiente porque lê o arquivo de forma incremental (linha por linha), sem carregar todo o conteúdo na memória. Isso é especialmente útil para arquivos grandes.
 
 ```go
